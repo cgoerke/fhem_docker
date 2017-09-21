@@ -1,10 +1,9 @@
 FROM debian:jessie
 
-MAINTAINER Matthias Kleine <info@haus-automatisierung.com>
+MAINTAINER Christian Görke 
 
 ENV FHEM_VERSION 5.8
 ENV DEBIAN_FRONTEND noninteractive
-ENV TERM xterm
 
 # Install dependencies
 RUN apt-get update && apt-get upgrade -y --force-yes && apt-get install -y --force-yes --no-install-recommends apt-utils
@@ -58,11 +57,12 @@ RUN echo Europe/Berlin > /etc/timezone && dpkg-reconfigure tzdata
 RUN wget https://fhem.de/fhem-${FHEM_VERSION}.deb && dpkg -i fhem-${FHEM_VERSION}.deb
 RUN userdel fhem
 
+VOLUME ["/opt/fhem"]
+
 WORKDIR "/opt/fhem"
 
-COPY data/fhem.cfg.example ./fhem.cfg
 COPY start.sh ./
 
-EXPOSE 8083 7072
+EXPOSE 8083
 
 CMD bash /opt/fhem/start.sh

@@ -61,7 +61,7 @@ VOLUME ["/opt/fhem"]
 
 WORKDIR "/opt/fhem"
 
-COPY start.sh ./
+COPY start.sh /opt/fhem/start.sh
 COPY ./data/contrib/dblog/db.conf /opt/fhem/contrib/dblog/db.conf
 
 EXPOSE 8083

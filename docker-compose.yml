@@ -25,24 +25,6 @@ services:
         depends_on:
             - "mysql"
 
-    homebridge:
-        expose:
-            - "51826"
-            - "8282"
-            - "5353"
-        ports:
-            - "51826:51826"
-            - "8282:8282"
-            - "5353:5353"
-        build: homebridge
-        volumes:
-            - ./homebridge/start.sh:/root/start.sh
-            - ./homebridge/config.json:/root/.homebridge/config.json
-        networks:
-            - code-network
-        depends_on:
-            - "fhem"
-
     mysql:
         expose:
             - "3306"
